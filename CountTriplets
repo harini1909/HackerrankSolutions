@@ -1,0 +1,48 @@
+import java.util.*;
+class CountTriplets{
+	public long countNo(List<Long> arr, long r)
+	{
+		HashMap<Long,Long> leftmap = new HashMap<>();
+		HashMap<Long,Long> rightmap = new HashMap<>();
+		for(Long value: arr)
+		{
+			rightmap.put(value,rightmap.getOrDefault(value,0L)+1);
+		}
+		long count=0;
+		for(int i=0;i<arr.size();i++)
+		{
+			long midterm = arr.get(i);
+			long x=0,y=0;
+			rightmap.put(midterm,rightmap.getOrDefault(midterm,0L)-1);
+			if(leftmap.containsKey(midterm/r) && midterm%r==0)
+			{
+				x=leftmap.get(midterm/r);
+			}
+			if(rightmap.containsKey(midterm*r))
+			{
+				y=rightmap.get(midterm*r);
+			}
+			count+=x*y;
+			leftmap.put(midterm,leftmap.getOrDefault(midterm,0L)+1);
+		}
+		return count;
+	}
+}
+public class Triplets
+{
+	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+		int  n= sc.nextInt();
+		long  r = sc.nextLong();
+		Long a[]= new Long[n];
+		for(int i=0;i<n;i++)
+		{
+			a[i]=sc.nextLong();
+		}
+		List<Long> arr = new ArrayList<Long>(Arrays.asList(a));
+		CountTriplets obj = new CountTriplets();
+		System.out.print(obj.countNo(arr, r));
+		sc.close();
+	}
+
+}
