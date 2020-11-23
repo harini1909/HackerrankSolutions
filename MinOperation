@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class MinOperation {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int arr[]= new int[n];
+		int result[]=new int[n];
+		for(int i=0;i<n;i++)
+		{
+			arr[i]=sc.nextInt();
+		
+			int count=0;
+			int num=0;
+			while(true)
+			{
+				if(num==0)
+				{
+					num++;
+					count++;
+				}
+				else if(num*2<=arr[i])
+				{
+					num=num*2;
+					count++;
+				}
+				else
+				{
+					num++;
+					count++;
+				}
+				if(num==arr[i])
+				{
+					result[i]=count;
+					break;
+				}
+			}
+		}
+		for(int i=0;i<n;i++)
+		{
+			System.out.println(result[i]);
+		}
+		sc.close();
+	}
+}
